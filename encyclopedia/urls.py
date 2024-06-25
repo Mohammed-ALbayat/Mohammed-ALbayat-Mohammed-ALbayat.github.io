@@ -8,5 +8,7 @@ urlpatterns = [
     path("searchEntry", views.searchEntry, name="searchEntry"),
     path("wiki/<str:title>", views.entry, name="entry"),
     path("randomPage", views.randomPage, name="randomPage"),
-    path("NewPage", views.CreateNewPage, name="NewPage")
+    path("NewPage", views.CreateNewPage, name="NewPage"),
+    path("EditPage", views.EditPage, name="EditPage"),
+    path("EditedPage", views.editedEntry, name="EditedPage")
 ]

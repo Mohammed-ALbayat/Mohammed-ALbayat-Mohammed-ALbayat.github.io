@@ -5,6 +5,7 @@ from markdown2 import Markdown
 from . import util
 from django.urls import reverse
 from random import randint
+
 class searchEntryForm(forms.Form):
     entryTitle = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Search Encyclopedia'}))
 
@@ -82,3 +83,29 @@ def CreateNewPage(request):
             "searchBar": searchEntryForm(),
             "alert": alert
             })
+
+def EditPage(request):
+    if request.method == "POST":
+        entryTitle = request.POST["title"]
+        content = util.get_entry(entryTitle)
+        if content == None:
+            content1 = entryTitle
+        return render(request, "encyclopedia/EditPage.html", {
+            "searchBar": searchEntryForm(),
+            "title": entryTitle,
+            "content": content
+            })
+    
+def editedEntry(request):
+    alert = 0
+    if request.method == "POST":
+        entryTitle = request.POST.get("name")
+        content = request.POST["content"]
+        util.save_entry(entryTitle, content)
+        return HttpResponse(entry(request, entryTitle))
+        # htmlPage = convert_md_to_html(entryTitle)
+        # return render(request, "encyclopedia/entry.html", {
+        #     "name" : entryTitle,
+        #     "content" : htmlPage,
+        #     "searchBar": searchEntryForm()
+        # })

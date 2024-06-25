@@ -1,0 +1,27 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Edit Page
+{% endblock %}
+
+{% block searchBar %}
+    {{searchBar}}
+{% endblock %}
+
+{% block body %}
+    
+    <h1>Edit Page</h1>
+    <form action="{% url 'wiki:EditedPage' %}" method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="InputTitle" class="form-label">Title</label>
+            <input type="text" class="form-control" id="InputTitle" style="width: fit-content;" name="name" value="{{title}}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="InputContents" class="form-label">Contents</label>
+            <textarea class="form-control" id="InputContents" rows="3" style="height: 200px; width: 75%;" name="content" >{{content}}</textarea>
+        </div>
+        <input type="submit" class="btn btn-primary btn-lg" value="Save Edits" >
+    </form>
+{% endblock %}

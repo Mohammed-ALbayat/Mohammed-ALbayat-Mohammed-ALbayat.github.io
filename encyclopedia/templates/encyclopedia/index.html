@@ -11,9 +11,9 @@
 {% block body %}
     <h1>All Pages</h1>
 
-    <ul>
+    <ul class="list-group" style="list-style-type: none;">
         {% for entry in entries %}
-            <li><a href="wiki/{{ entry }}">{{ entry }}</a></li>
+            <li style="width: 75%;"><a class="list-group-item list-group-item-action" href="wiki/{{ entry }}">{{ entry }}</a></li>
         {% endfor %}
     </ul>
 
